@@ -11,6 +11,7 @@ import {
   convertSelfCleanFrequencyToService,
   convertToLowerCase,
   getCleaningModeFriendlyName,
+  getSuctionLevelFriendlyName,
 } from '../../utils';
 import {
   SLIDER_CONFIG,
@@ -77,7 +78,7 @@ export function CustomMode({
       {/* Custom Mode - Cleaning Mode */}
       <section className="cleaning-mode-modal__section">
         <h3 className="cleaning-mode-modal__section-title">Cleaning Mode</h3>
-        <div className="cleaning-mode-modal__horizontal-scroll">
+        <div className="cleaning-mode-modal__power-grid">
           {cleaningModeList.map((mode, idx) => (
             <div key={idx} className="cleaning-mode-modal__mode-option">
               <CircularButton
@@ -85,6 +86,7 @@ export function CustomMode({
                 selected={mode === cleaningMode}
                 onClick={() => setSelectOption(entityIds.cleaningMode, convertCleaningModeToService(mode as CleaningMode))}
                 icon={getCleaningModeIcon(mode as CleaningMode)}
+                iconStyle={idx > 1 ? {fontSize: 13, color: "black"} : {}}
               />
               <span className="cleaning-mode-modal__mode-option-label">{getCleaningModeFriendlyName(mode as CleaningMode)}</span>
             </div>
@@ -103,8 +105,9 @@ export function CustomMode({
                 selected={level === suctionLevel}
                 onClick={() => setSelectOption(entityIds.suctionLevel, convertToLowerCase(level))}
                 icon={getSuctionLevelIcon(level as SuctionLevel)}
+                iconStyle={idx > 2 ? {fontSize: 13, color: "black"} : {}}
               />
-              <span className="cleaning-mode-modal__power-label">{level}</span>
+              <span className="cleaning-mode-modal__power-label">{getSuctionLevelFriendlyName(level as SuctionLevel)}</span>
             </div>
           ))}
         </div>
@@ -231,7 +234,6 @@ export function CustomMode({
       <section className="cleaning-mode-modal__section">
         <div className="cleaning-mode-modal__section-header">
           <h3 className="cleaning-mode-modal__section-title">Route</h3>
-          <span className="cleaning-mode-modal__help-icon">?</span>
         </div>
 
         <div className="cleaning-mode-modal__route-grid">

@@ -12,6 +12,15 @@ import {
   MOP_ICON_SVG,
   VACUUM_MOP_ICON_SVG,
   MOP_AFTER_VACUUM_ICON_SVG,
+  SUCTION_QUIET_ICON_SVG,
+  SUCTION_STANDARD_ICON_SVG,
+  SUCTION_STRONG_ICON_SVG,
+  SUCTION_TURBO_ICON_SVG,
+  CLEANING_MODE,
+  CLEANING_ROUTE_QUICK_ICON_SVG,
+  CLEANING_ROUTE_STANDARD_ICON_SVG,
+  CLEANING_ROUTE_INTENSIVE_ICON_SVG,
+  CLEANING_ROUTE_DEEP_ICON_SVG,
 } from '../constants';
 import type { CleaningMode, CleanGeniusMode, SuctionLevel, CleaningRoute, SelfCleanFrequency } from '../types/vacuum';
 
@@ -20,11 +29,18 @@ import type { CleaningMode, CleanGeniusMode, SuctionLevel, CleaningRoute, SelfCl
  * Returns either an SVG string or emoji
  */
 export function getCleaningModeIcon(mode: CleaningMode): string {
-  if (mode.includes('Sweep') && mode.includes('Mop')) return VACUUM_MOP_ICON_SVG;
-  if (mode.includes('after')) return MOP_AFTER_VACUUM_ICON_SVG;
-  if (mode.includes('Mop')) return MOP_ICON_SVG;
-  if (mode.includes('Sweep') || mode.includes('Vacuum')) return VACUUM_ICON_SVG;
-  return '⚙️';
+  switch (mode) {
+    case CLEANING_MODE.SWEEPING:
+      return VACUUM_ICON_SVG;
+    case CLEANING_MODE.MOPPING:
+      return MOP_ICON_SVG;
+    case CLEANING_MODE.SWEEPING_AND_MOPPING:
+      return VACUUM_MOP_ICON_SVG;
+    case CLEANING_MODE.MOPPING_AFTER_SWEEPING:
+      return MOP_AFTER_VACUUM_ICON_SVG;
+    default:
+      return '';
+  }
 }
 
 /**
@@ -38,18 +54,26 @@ export function getCleanGeniusModeIcon(mode: CleanGeniusMode): string {
     case CLEANGENIUS_MODE.MOP_AFTER_VACUUM:
       return MOP_AFTER_VACUUM_ICON_SVG;
     default:
-      return '⚙️';
+      return '';
   }
 }
 
 /**
  * Get icon for suction level
+ * Returns SVG string
  */
 export function getSuctionLevelIcon(level: SuctionLevel): string {
-  if (level.includes(SUCTION_LEVEL.QUIET) || level.includes(SUCTION_LEVEL.SILENT)) return '🌙';
-  if (level.includes(SUCTION_LEVEL.TURBO)) return '⚡';
-  if (level.includes(SUCTION_LEVEL.STRONG)) return '🌀';
-  return '🔄';
+  switch (level) {
+    case SUCTION_LEVEL.QUIET:
+    case SUCTION_LEVEL.SILENT:
+      return SUCTION_QUIET_ICON_SVG;
+    case SUCTION_LEVEL.STANDARD:
+      return SUCTION_STANDARD_ICON_SVG;
+    case SUCTION_LEVEL.STRONG:
+      return SUCTION_STRONG_ICON_SVG;
+    case SUCTION_LEVEL.TURBO:
+      return SUCTION_TURBO_ICON_SVG;
+  }
 }
 
 /**
@@ -58,15 +82,13 @@ export function getSuctionLevelIcon(level: SuctionLevel): string {
 export function getCleaningRouteIcon(route: CleaningRoute): string {
   switch (route) {
     case CLEANING_ROUTE.QUICK:
-      return '⌇';
+      return CLEANING_ROUTE_QUICK_ICON_SVG;
     case CLEANING_ROUTE.STANDARD:
-      return '≡';
+      return CLEANING_ROUTE_STANDARD_ICON_SVG;
     case CLEANING_ROUTE.INTENSIVE:
-      return '⋮⋮';
+      return CLEANING_ROUTE_INTENSIVE_ICON_SVG;
     case CLEANING_ROUTE.DEEP:
-      return '⫴';
-    default:
-      return '≡';
+      return CLEANING_ROUTE_DEEP_ICON_SVG;
   }
 }
 

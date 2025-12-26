@@ -2,8 +2,8 @@
  * Utility functions for getting friendly display names
  */
 
-import { CLEANGENIUS_MODE, CLEANING_MODE } from '../constants';
-import type { CleaningMode, CleanGeniusMode } from '../types/vacuum';
+import { CLEANGENIUS_MODE, CLEANING_MODE, SUCTION_LEVEL } from '../constants';
+import type { CleaningMode, CleanGeniusMode, SuctionLevel } from '../types/vacuum';
 
 /**
  * Get friendly name for cleaning mode
@@ -35,4 +35,18 @@ export function getCleanGeniusModeFriendlyName(mode: CleanGeniusMode): string {
     default:
       return mode;
   }
+}
+
+/**
+ * Get friendly name for suction level
+ * Maps: Strong -> Turbo, Turbo -> Max
+ */
+export function getSuctionLevelFriendlyName(level: SuctionLevel): string {
+  if (level === SUCTION_LEVEL.STRONG || level.includes('Strong')) {
+    return 'Turbo';
+  }
+  if (level === SUCTION_LEVEL.TURBO || level.includes('Turbo')) {
+    return 'Max';
+  }
+  return level;
 }

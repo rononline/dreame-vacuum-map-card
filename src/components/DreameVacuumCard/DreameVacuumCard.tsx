@@ -109,6 +109,8 @@ export function DreameVacuumCard({ hass, config }: DreameVacuumCardProps) {
     return <div className="dreame-vacuum-card__error">Entity not found: {config.entity}</div>;
   }
 
+  console.log(entity)
+
   return (
     <div className="dreame-vacuum-card">
       <div className="dreame-vacuum-card__container">

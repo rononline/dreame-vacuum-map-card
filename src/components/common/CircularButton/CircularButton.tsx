@@ -6,6 +6,7 @@ interface CircularButtonProps {
   selected?: boolean;
   onClick?: () => void;
   size?: 'small' | 'medium' | 'large';
+  iconStyle?: React.CSSProperties;
 }
 
 export function CircularButton({ 
@@ -13,7 +14,8 @@ export function CircularButton({
   label, 
   selected = false, 
   onClick,
-  size = 'medium' 
+  size = 'medium',
+  iconStyle = {}
 }: CircularButtonProps) {
   // Check if icon is an SVG string
   const isSvg = typeof icon === 'string' && icon.trim().startsWith('<svg');
@@ -33,7 +35,7 @@ export function CircularButton({
               dangerouslySetInnerHTML={{ __html: icon }}
             />
           ) : (
-            <span className="circular-button__icon">{icon}</span>
+            <span className="circular-button__icon" style={iconStyle}>{icon}</span>
           )
         ) : (
           icon
