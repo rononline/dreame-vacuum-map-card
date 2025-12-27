@@ -162,11 +162,11 @@
   }
 
   &__mode-option {
-    min-width: 80px;
+    min-width: 70px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
   }
 
   &__mode-option-label {
@@ -179,7 +179,6 @@
   &__power-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
     margin-bottom: 16px;
   }
 
