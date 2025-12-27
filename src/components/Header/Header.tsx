@@ -22,7 +22,7 @@ export function Header({ entity, deviceName }: HeaderProps) {
       <h2 className="header__title">{deviceName}</h2>
       <p className="header__status">{getStatusText()}</p>
 
-      {progress > 0 && (
+      {entity.attributes.status !== "Sleeping" && progress > 0 && (
         <div className="header__progress">
           <div className="header__progress-bar">
             <div
