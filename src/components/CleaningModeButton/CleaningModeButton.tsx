@@ -51,7 +51,7 @@ export function CleaningModeButton({ cleaningMode, cleangenius, onClick, onShort
         </div>
         <span className="cleaning-mode-button__arrow">›</span>
       </button>
-      {cleangenius !== 'Off' && onShortcutsClick && (
+      {cleangenius === 'Off' && onShortcutsClick && (
         <button
           className="cleaning-mode-button-wrapper__shortcuts"
           onClick={handleShortcutsClick}

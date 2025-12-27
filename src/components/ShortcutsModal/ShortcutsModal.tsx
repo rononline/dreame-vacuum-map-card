@@ -15,7 +15,6 @@ export function ShortcutsModal({
   entity,
   hass,
 }: ShortcutsModalProps) {
-  // Get shortcuts from entity attributes - it's an object with IDs as keys
   const shortcutsObj = entity.attributes.shortcuts || {};
   const shortcuts = Object.entries(shortcutsObj).map(([id, data]: [string, any]) => ({
     id: parseInt(id),
@@ -47,13 +46,12 @@ export function ShortcutsModal({
           <div className="shortcuts-modal__list">
             {shortcuts.map((shortcut) => (
               <button
-                style={{width : '100%', height: '40px', marginBottom: '10px', backgroundColor: '#f0f0f0', border: 'none', borderRadius: '5px', cursor: 'pointer', color: 'black'}}
                 key={shortcut.id}
                 className="shortcuts-modal__item"
                 onClick={() => handleShortcutClick(shortcut.id)}
               >
-                <span>▶   </span>
-                <span>{shortcut.name}</span>
+                <span className="shortcuts-modal__item-icon">▶   </span>
+                <span className="shortcuts-modal__item-name">{shortcut.name}</span>
               </button>
             ))}
           </div>
