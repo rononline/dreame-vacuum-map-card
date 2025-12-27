@@ -62,11 +62,6 @@ npm run build
 
 The built file will be in `dist/dreame-vacuum-map-card.js`
 
-### Deploy to Home Assistant
-```bash
-npm run deploy
-```
-
 ## Tech Stack
 
 - **React 19.2.0** - Modern UI library
