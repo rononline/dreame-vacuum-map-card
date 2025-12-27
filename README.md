@@ -8,6 +8,14 @@ A modern, beautiful Home Assistant Lovelace card for controlling Dreame robot va
 
 ![Main Screen](screenshots/image.png)
 
+![Room Cleaning](screenshots/image2.png)
+
+![Custom Cleaning mode](screenshots/image3.png)
+
+![Clean Genius mode](screenshots/image4.png)
+
+![Zone Cleaning mode](screenshots/image5.png)
+
 ## Installation
 
 ### 1. Download the card
