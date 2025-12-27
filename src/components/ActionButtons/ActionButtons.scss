@@ -28,7 +28,7 @@
 
   &__clean {
     background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%);
-    color: #fff;
+    color: white;
     box-shadow: 0 4px 15px rgba(255, 165, 0, 0.3);
 
     &:hover {
@@ -38,7 +38,7 @@
 
   &__pause {
     background: linear-gradient(135deg, #ff9500 0%, #ff6b00 100%);
-    color: #fff;
+    color: white;
     box-shadow: 0 4px 15px rgba(255, 149, 0, 0.3);
 
     &:hover {
@@ -48,7 +48,7 @@
 
   &__resume {
     background: linear-gradient(135deg, #34c759 0%, #30d158 100%);
-    color: #fff;
+    color: white;
     box-shadow: 0 4px 15px rgba(52, 199, 89, 0.3);
 
     &:hover {
@@ -58,7 +58,7 @@
 
   &__stop {
     background: linear-gradient(135deg, #ff3b30 0%, #ff1f0f 100%);
-    color: #fff;
+    color: white;
     box-shadow: 0 4px 15px rgba(255, 59, 48, 0.3);
 
     &:hover {
@@ -67,11 +67,11 @@
   }
 
   &__dock {
-    background: #e8e8e8;
-    color: #1a1a1a;
+    background: var(--surface-tertiary, #e8e8e8);
+    color: var(--text-primary, #1a1a1a);
 
     &:hover {
-      background: #ddd;
+      background: var(--surface-secondary, #ddd);
     }
   }
 

@@ -40,12 +40,12 @@
 
 .cleaning-mode-button {
   flex: 1;
-  background: #fff;
+  background: var(--surface-bg, #fff);
   border: none;
   border-radius: 12px;
   padding: 12px 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  color: #1a1a1a;
+  box-shadow: 0 2px 8px var(--card-shadow, rgba(0, 0, 0, 0.08));
+  color: var(--text-primary, #1a1a1a);
   font-weight: 400;
   font-size: 15px;
   cursor: pointer;
@@ -55,7 +55,7 @@
   transition: transform 0.1s ease;
 
   &:hover:not(:disabled) {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 4px 12px var(--card-shadow-hover, rgba(0, 0, 0, 0.12));
   }
 
   &:active:not(:disabled) {
@@ -85,7 +85,7 @@
 
   &__arrow {
     font-size: 20px;
-    color: #999;
+    color: var(--text-tertiary, #999);
   }
 }
 

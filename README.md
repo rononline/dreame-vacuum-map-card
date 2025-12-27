@@ -37,8 +37,18 @@ Go to Settings → Dashboards → Resources → Add Resource:
 type: custom:dreame-vacuum-map-card
 entity: vacuum.dreame_vacuum_entity
 title: Dreame Vacuum
-map_entity: camera.dreame_vacuum_entity # Optional, defaults to camera.${ENTITY_NAME}_map 
+map_entity: camera.dreame_vacuum_entity # Optional, defaults to camera.${ENTITY_NAME}_map
+theme: dark # Optional, 'light' (default) or 'dark'
 ```
+
+## Configuration
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `entity` | string | **Required** | Entity ID of your Dreame vacuum |
+| `title` | string | Optional | Custom title for the card |
+| `map_entity` | string | Optional | Camera entity for the vacuum map (defaults to `camera.${ENTITY_NAME}_map`) |
+| `theme` | string | `light` | Theme mode: `light` or `dark` |
 
 ## Development
 

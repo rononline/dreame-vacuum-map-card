@@ -27,6 +27,7 @@ export interface HassConfig {
   map_entity?: string;
   title?: string;
   type: string;
+  theme?: 'light' | 'dark';
 }
 
 export interface Hass {

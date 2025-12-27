@@ -23,6 +23,7 @@ export function DreameVacuumCard({ hass, config }: DreameVacuumCardProps) {
   const [shortcutsModalOpened, setShortcutsModalOpened] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
 
+  const theme = config.theme || 'light';
   const entity = hass.states[config.entity];
 
   const deviceName = entity?.attributes?.friendly_name || config.title || 'Dreame Vacuum';
@@ -149,7 +150,7 @@ export function DreameVacuumCard({ hass, config }: DreameVacuumCardProps) {
   const effectiveMode = getEffectiveMode();
 
   return (
-    <div className="dreame-vacuum-card">
+    <div className={`dreame-vacuum-card dreame-vacuum-card--${theme}`}>
       <div className="dreame-vacuum-card__container">
         <Header entity={entity} deviceName={deviceName} />
         

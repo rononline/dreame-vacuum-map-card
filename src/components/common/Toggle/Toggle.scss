@@ -17,7 +17,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #e0e0e0;
+    background-color: var(--surface-tertiary, #e0e0e0);
     transition: 0.4s;
     border-radius: 31px;
   }
@@ -28,14 +28,14 @@
     width: 27px;
     left: 2px;
     bottom: 2px;
-    background-color: white;
+    background-color: var(--surface-bg, white);
     transition: 0.4s;
     border-radius: 50%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 4px var(--card-shadow, rgba(0, 0, 0, 0.2));
   }
 
   &__input:checked + &__slider {
-    background-color: #D4AF37;
+    background-color: var(--toggle-active, #D4AF37);
   }
 
   &__input:checked + &__slider &__knob {

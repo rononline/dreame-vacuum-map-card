@@ -3,11 +3,11 @@
   margin: 0 20px;
   border-radius: 15px;
   overflow: hidden;
-  background: #fff;
+  background: var(--surface-bg, #fff);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px var(--card-shadow, rgba(0, 0, 0, 0.1));
   min-height: 300px;
 
   &__image {
@@ -15,6 +15,11 @@
     height: 100%;
     object-fit: contain;
     border-radius: 15px;
+  }
+  
+  // Dark mode filter for map image
+  .dreame-vacuum-card--dark & &__image {
+    filter: brightness(0.8) contrast(0.9) saturate(0.85);
   }
 
   &__placeholder {
