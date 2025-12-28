@@ -6,3 +6,4 @@ export * from './converters';
 export * from './formatters';
 export * from './icons';
 export * from './helpers';
+export * from './mock';

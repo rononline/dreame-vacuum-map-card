@@ -77,8 +77,67 @@ npm install
 ```
 
 ### Development Mode
+
+Run the development server with mock data:
 ```bash
 npm run dev
+```
+
+The app will start at http://localhost:5173 with mock vacuum data automatically loaded.
+
+#### Development with Mock API Server
+
+If you need to test API endpoints, run the mock server separately:
+
+**Terminal 1 - Mock Server:**
+```bash
+npm run mock
+```
+
+**Terminal 2 - Dev Server:**
+```bash
+npm run dev
+```
+
+Or run both together:
+```bash
+npm run dev:mock
+```
+
+#### Environment Configuration
+
+Copy `.env.example` to `.env` and customize as needed:
+```bash
+cp .env.example .env
+```
+
+Available environment variables:
+- `VITE_MOCK_ENTITY_ID` - Mock vacuum entity ID (default: `vacuum.dima`)
+- `VITE_MOCK_ENTITY_TITLE` - Display title (default: `Dima`)
+- `VITE_MOCK_SERVER_URL` - Mock server URL (default: `http://localhost:3001`)
+- `VITE_MOCK_SERVER_PORT` - Mock server port (default: `3001`)
+
+See [ENV_VARIABLES.md](ENV_VARIABLES.md) for detailed configuration options.
+
+#### Development Utilities
+
+In development mode, utilities are available in the browser console:
+
+```javascript
+// Check current vacuum state
+devUtils.getState()
+
+// Call vacuum services
+devUtils.callService('vacuum', 'start')
+
+// Simulate scenarios
+devUtils.simulateCleaningComplete()
+devUtils.simulateBatteryDrain(20)
+devUtils.simulateError('Wheel stuck')
+devUtils.resetVacuum()
+
+// Update state manually
+devUtils.updateState({ state: 'cleaning' })
 ```
 
 ### Build for Production
