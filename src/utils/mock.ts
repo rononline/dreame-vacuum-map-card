@@ -2,9 +2,6 @@ import type { Hass, HassEntity } from '../types/homeassistant';
 import mockData from '../../mock-data.json';
 import { devConfig } from '../config/env';
 
-/**
- * Creates a mock Hass object for development
- */
 export function createMockHass(): Hass {
   // Create a mutable states object that can be updated
   const states: Record<string, HassEntity> = {
@@ -63,9 +60,6 @@ export function createMockHass(): Hass {
   return hass;
 }
 
-/**
- * Handles mock vacuum service calls and updates state
- */
 function handleVacuumService(
   service: string,
   serviceData: any,
@@ -145,9 +139,6 @@ function handleVacuumService(
   });
 }
 
-/**
- * Updates mock entity state (useful for simulating state changes)
- */
 export function updateMockEntityState(
   hass: Hass,
   entityId: string,

@@ -6,9 +6,6 @@ import { updateMockEntityState } from './mock';
  * These functions are only available in development mode
  */
 
-/**
- * Simulates the vacuum completing a cleaning cycle
- */
 export function simulateCleaningComplete(hass: Hass, entityId: string) {
   updateMockEntityState(hass, entityId, {
     state: 'returning',
@@ -35,9 +32,6 @@ export function simulateCleaningComplete(hass: Hass, entityId: string) {
   }, 2000);
 }
 
-/**
- * Simulates battery drain
- */
 export function simulateBatteryDrain(hass: Hass, entityId: string, amount: number = 10) {
   const currentBattery = hass.states[entityId]?.attributes?.battery || 100;
   updateMockEntityState(hass, entityId, {
@@ -48,9 +42,6 @@ export function simulateBatteryDrain(hass: Hass, entityId: string, amount: numbe
   });
 }
 
-/**
- * Simulates an error state
- */
 export function simulateError(hass: Hass, entityId: string, errorMessage: string) {
   updateMockEntityState(hass, entityId, {
     state: 'error',
@@ -63,9 +54,6 @@ export function simulateError(hass: Hass, entityId: string, errorMessage: string
   });
 }
 
-/**
- * Resets the vacuum to docked state
- */
 export function resetVacuum(hass: Hass, entityId: string) {
   updateMockEntityState(hass, entityId, {
     state: 'docked',

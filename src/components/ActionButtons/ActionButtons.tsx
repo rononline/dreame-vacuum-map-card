@@ -1,4 +1,5 @@
 import type { CleaningMode } from '../../types/homeassistant';
+import { CleanButton, PauseButton, ResumeButton, StopButton, DockButton } from './components';
 import './ActionButtons.scss';
 
 interface ActionButtonsProps {
@@ -14,6 +15,21 @@ interface ActionButtonsProps {
   onDock: () => void;
 }
 
+function getCleanButtonText(mode: CleaningMode, roomsCount: number): string {
+  switch (mode) {
+    case 'room':
+      return roomsCount > 0
+        ? `Clean ${roomsCount} Room${roomsCount > 1 ? 's' : ''}`
+        : 'Select Rooms';
+    case 'all':
+      return 'Clean All';
+    case 'zone':
+      return 'Zone Clean';
+    default:
+      return 'Clean';
+  }
+}
+
 export function ActionButtons({
   selectedMode,
   selectedRoomsCount,
@@ -26,61 +42,33 @@ export function ActionButtons({
   onStop,
   onDock,
 }: ActionButtonsProps) {
-  const getCleanButtonText = () => {
-    switch (selectedMode) {
-      case 'room':
-        return selectedRoomsCount > 0
-          ? `Clean ${selectedRoomsCount} Room${selectedRoomsCount > 1 ? 's' : ''}`
-          : 'Select Rooms';
-      case 'all':
-        return 'Clean All';
-      case 'zone':
-        return 'Zone Clean';
-      default:
-        return 'Clean';
-    }
-  };
+  const cleanButtonText = getCleanButtonText(selectedMode, selectedRoomsCount);
 
+  // Running state - show pause and stop
   if (isRunning && !isPaused && !isDocked) {
     return (
       <div className="action-buttons">
-        <button onClick={onPause} className="action-buttons__pause">
-          <span className="action-buttons__icon">⏸️</span>
-          <span>Pause</span>
-        </button>
-        {<button onClick={onStop} className="action-buttons__stop">
-          <span className="action-buttons__icon">⏹️</span>
-          <span>End</span>
-        </button>}
+        <PauseButton onClick={onPause} />
+        <StopButton onClick={onStop} />
       </div>
     );
   }
 
+  // Paused state - show resume and stop
   if (isPaused) {
     return (
       <div className="action-buttons">
-        <button onClick={onResume} className="action-buttons__resume">
-          <span className="action-buttons__icon">▶️</span>
-          <span>Resume</span>
-        </button>
-        <button onClick={onStop} className="action-buttons__stop">
-          <span className="action-buttons__icon">⏹️</span>
-          <span>Stop</span>
-        </button>
+        <ResumeButton onClick={onResume} />
+        <StopButton onClick={onStop} />
       </div>
     );
   }
 
+  // Idle/docked state - show clean and dock
   return (
     <div className="action-buttons">
-      <button onClick={onClean} className="action-buttons__clean">
-        <span className="action-buttons__icon">▶️</span>
-        <span>{getCleanButtonText()}</span>
-      </button>
-      <button onClick={onDock} className="action-buttons__dock">
-        <span className="action-buttons__icon">🏠</span>
-        <span>Dock</span>
-      </button>
+      <CleanButton onClick={onClean} text={cleanButtonText} />
+      <DockButton onClick={onDock} />
     </div>
   );
 }

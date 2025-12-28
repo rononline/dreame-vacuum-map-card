@@ -7,3 +7,4 @@ export * from './formatters';
 export * from './icons';
 export * from './helpers';
 export * from './mock';
+export * from './entityHelpers';
