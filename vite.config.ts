@@ -1,20 +1,21 @@
-import { defineConfig } from 'vite'
+import { defineConfig, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
+import type { OutputBundle, OutputChunk, OutputAsset } from 'rollup'
 
-function inlineCSS() {
+function inlineCSS(): Plugin {
   return {
     name: 'inline-css',
     apply: 'build' as const,
     enforce: 'post' as const,
-    generateBundle(_options: any, bundle: any) {
+    generateBundle(_options: unknown, bundle: OutputBundle) {
       const cssFiles = Object.keys(bundle).filter(key => key.endsWith('.css'));
       const jsFiles = Object.keys(bundle).filter(key => key.endsWith('.js'));
       
       if (cssFiles.length > 0 && jsFiles.length > 0) {
-        const cssFile = bundle[cssFiles[0]];
-        const jsFile = bundle[jsFiles[0]];
+        const cssFile = bundle[cssFiles[0]] as OutputAsset;
+        const jsFile = bundle[jsFiles[0]] as OutputChunk;
         
-        const cssContent = cssFile.source || cssFile.code;
+        const cssContent = cssFile.source;
         const cssInjectionCode = `
 (function() {
   const style = document.createElement('style');

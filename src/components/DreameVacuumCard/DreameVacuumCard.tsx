@@ -125,12 +125,12 @@ export function DreameVacuumCard({ hass, config }: DreameVacuumCardProps) {
         )}
 
         <CleaningModeButton 
-          cleanGeniusMode={entity.attributes.cleangenius_mode}
-          cleaningMode={entity.attributes.cleaning_mode || 'Sweeping and mopping'} 
-          cleangenius={entity.attributes.cleangenius || 'Off'}
+          cleanGeniusMode={typeof entity.attributes.cleangenius_mode === 'string' ? entity.attributes.cleangenius_mode : ''}
+          cleaningMode={typeof entity.attributes.cleaning_mode === 'string' ? entity.attributes.cleaning_mode : 'Sweeping and mopping'} 
+          cleangenius={typeof entity.attributes.cleangenius === 'string' ? entity.attributes.cleangenius : 'Off'}
           onClick={() => setModalOpened(true)} 
           onShortcutsClick={() => setShortcutsModalOpened(true)}
-          disabled={entity.attributes.started || false}
+          disabled={typeof entity.attributes.started === 'boolean' ? entity.attributes.started : false}
           language={language}
         />
 
@@ -142,16 +142,16 @@ export function DreameVacuumCard({ hass, config }: DreameVacuumCardProps) {
           <ModeTabs 
             selectedMode={effectiveMode} 
             onModeChange={handleModeChange} 
-            disabled={entity.attributes.started || false}
+            disabled={typeof entity.attributes.started === 'boolean' ? entity.attributes.started : false}
             language={language}
           />
           
           <ActionButtons
             selectedMode={selectedMode}
             selectedRoomsCount={selectedRooms.size}
-            isRunning={entity.attributes.running || false}
-            isPaused={entity.attributes.paused || false}
-            isDocked={entity.state === "docked" || entity.attributes.docked || false}
+            isRunning={typeof entity.attributes.running === 'boolean' ? entity.attributes.running : false}
+            isPaused={typeof entity.attributes.paused === 'boolean' ? entity.attributes.paused : false}
+            isDocked={entity.state === "docked" || (typeof entity.attributes.docked === 'boolean' && entity.attributes.docked) || false}
             onClean={handleCleanAction}
             onPause={handlePause}
             onResume={handleResume}

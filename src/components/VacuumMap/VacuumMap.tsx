@@ -93,7 +93,7 @@ export function VacuumMap({
     const xPercent = Math.max(0, Math.min(100, (x / rect.width) * 100));
     const yPercent = Math.max(0, Math.min(100, (y / rect.height) * 100));
 
-    let newZone: Zone = { ...resizeStartZone };
+    const newZone: Zone = { ...resizeStartZone };
 
     switch (resizingHandle) {
       case 'tl':

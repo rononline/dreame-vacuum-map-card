@@ -1,7 +1,7 @@
-/// <reference path="../../types/custom-elements.d.ts" />
 import type { RoomPosition } from '../../types/homeassistant';
 import type { SupportedLanguage } from '../../i18n/locales';
 import { useTranslation } from '../../hooks';
+import '../../types/custom-elements.d.ts';
 import './RoomSelector.scss';
 import React from 'react';
 

@@ -4,6 +4,11 @@ import { useTranslation } from '../../hooks/useTranslation';
 import type { SupportedLanguage } from '../../i18n/locales';
 import './ShortcutsModal.scss';
 
+interface ShortcutData {
+  name: string;
+  [key: string]: unknown;
+}
+
 interface ShortcutsModalProps {
   opened: boolean;
   onClose: () => void;
@@ -20,8 +25,8 @@ export function ShortcutsModal({
   language,
 }: ShortcutsModalProps) {
   const { t } = useTranslation(language);
-  const shortcutsObj = entity.attributes.shortcuts || {};
-  const shortcuts = Object.entries(shortcutsObj).map(([id, data]: [string, any]) => ({
+  const shortcutsObj = (entity.attributes.shortcuts || {}) as Record<string, ShortcutData>;
+  const shortcuts = Object.entries(shortcutsObj).map(([id, data]) => ({
     id: parseInt(id),
     ...data,
   }));

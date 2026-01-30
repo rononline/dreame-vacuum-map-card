@@ -33,7 +33,7 @@ export function simulateCleaningComplete(hass: Hass, entityId: string) {
 }
 
 export function simulateBatteryDrain(hass: Hass, entityId: string, amount: number = 10) {
-  const currentBattery = hass.states[entityId]?.attributes?.battery || 100;
+  const currentBattery = (hass.states[entityId]?.attributes?.battery as number | undefined) ?? 100;
   updateMockEntityState(hass, entityId, {
     attributes: {
       ...hass.states[entityId].attributes,
@@ -76,16 +76,29 @@ export function resetVacuum(hass: Hass, entityId: string) {
  */
 export function attachDevUtils(hass: Hass, entityId: string) {
   if (import.meta.env.DEV) {
-    (window as any).devUtils = {
+    interface DevUtils {
+      hass: Hass;
+      entityId: string;
+      simulateCleaningComplete: () => void;
+      simulateBatteryDrain: (amount?: number) => void;
+      simulateError: (message: string) => void;
+      resetVacuum: () => void;
+      updateState: (updates: Partial<{ state: string; attributes: Record<string, unknown> }>) => void;
+      getState: () => typeof hass.states[string];
+      callService: (domain: string, service: string, data?: Record<string, unknown>) => Promise<void>;
+    }
+
+    (window as Window & { devUtils?: DevUtils }).devUtils = {
       hass,
       entityId,
       simulateCleaningComplete: () => simulateCleaningComplete(hass, entityId),
       simulateBatteryDrain: (amount?: number) => simulateBatteryDrain(hass, entityId, amount),
       simulateError: (message: string) => simulateError(hass, entityId, message),
       resetVacuum: () => resetVacuum(hass, entityId),
-      updateState: (updates: any) => updateMockEntityState(hass, entityId, updates),
+      updateState: (updates: Partial<{ state: string; attributes: Record<string, unknown> }>) => 
+        updateMockEntityState(hass, entityId, updates),
       getState: () => hass.states[entityId],
-      callService: (domain: string, service: string, data?: any) => 
+      callService: (domain: string, service: string, data?: Record<string, unknown>) => 
         hass.callService(domain, service, data),
     };
   }

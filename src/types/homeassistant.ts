@@ -9,9 +9,13 @@ export interface HassEntity {
     entity_picture?: string;
     rooms?: Record<string, Room[]>;
     selected_map?: string;
-    [key: string]: any;
+    [key: string]: unknown;
   };
-  context: any;
+  context: {
+    id: string;
+    parent_id?: string | null;
+    user_id?: string | null;
+  };
   last_changed: string;
   last_updated: string;
 }
@@ -34,7 +38,7 @@ export interface HassConfig {
 
 export interface Hass {
   states: Record<string, HassEntity>;
-  callService: (domain: string, service: string, data?: any) => Promise<void>;
+  callService: (domain: string, service: string, data?: Record<string, unknown>) => Promise<void>;
   hassUrl: (path: string) => string;
 }
 

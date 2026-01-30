@@ -2,7 +2,20 @@ import type { Hass, HassEntity } from '../types/homeassistant';
 import mockData from '../../mock-data.json';
 import { devConfig } from '../config/env';
 
-const data = mockData as any;
+interface MockData {
+  entity_id: string;
+  state: string;
+  attributes: Record<string, unknown>;
+  context: {
+    id: string;
+    parent_id: string | null;
+    user_id: string | null;
+  };
+  last_changed: string;
+  last_updated: string;
+}
+
+const data = mockData as MockData;
 
 export function createMockHass(): Hass {
   // Create a mutable states object that can be updated
@@ -10,7 +23,7 @@ export function createMockHass(): Hass {
     [data.entity_id]: {
       entity_id: data.entity_id,
       state: data.state,
-      attributes: data.attributes as any,
+      attributes: data.attributes,
       context: data.context,
       last_changed: data.last_changed,
       last_updated: data.last_updated,
@@ -39,7 +52,7 @@ export function createMockHass(): Hass {
       return `${devConfig.mockServerUrl}${path}`;
     },
     
-    callService: async (domain: string, service: string, serviceData?: any) => {
+    callService: async (domain: string, service: string, serviceData?: Record<string, unknown>) => {
       console.log('[Mock Hass] Service called:', {
         domain,
         service,
@@ -64,10 +77,10 @@ export function createMockHass(): Hass {
 
 function handleVacuumService(
   service: string,
-  serviceData: any,
+  serviceData: Record<string, unknown> | undefined,
   states: Record<string, HassEntity>
 ) {
-  const entityId = serviceData?.entity_id || data.entity_id;
+  const entityId = (serviceData?.entity_id as string | undefined) || data.entity_id;
   const entity = states[entityId];
   
   if (!entity) {

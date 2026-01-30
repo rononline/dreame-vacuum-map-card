@@ -1,3 +1,5 @@
+import type { HassEntity } from '../types/homeassistant';
+
 /**
  * Calibration point structure from map entity attributes
  */
@@ -78,7 +80,7 @@ function imageToVacuum(imgX: number, imgY: number, dimensions: MapDimensions): {
  */
 export function convertUIZoneToVacuumZone(
   uiZone: UIZone,
-  mapEntity: any,
+  mapEntity: HassEntity | undefined,
   imageWidth: number,
   imageHeight: number
 ): VacuumZone {
@@ -166,23 +168,26 @@ function convertUsingCalibration(
 /**
  * Get calibration points from map entity
  */
-export function getCalibrationPoints(mapEntity: any): CalibrationPoint[] | null {
+export function getCalibrationPoints(mapEntity: HassEntity | undefined): CalibrationPoint[] | null {
   const calibration = mapEntity?.attributes?.calibration_points;
   
   if (!calibration || !Array.isArray(calibration) || calibration.length < 3) {
     return null;
   }
 
-  return calibration.map((point: any) => ({
-    vacuum: { x: point.vacuum?.x ?? 0, y: point.vacuum?.y ?? 0 },
-    map: { x: point.map?.x ?? 0, y: point.map?.y ?? 0 },
-  }));
+  return calibration.map((point: unknown) => {
+    const p = point as { vacuum?: { x?: number; y?: number }; map?: { x?: number; y?: number } };
+    return {
+      vacuum: { x: p.vacuum?.x ?? 0, y: p.vacuum?.y ?? 0 },
+      map: { x: p.map?.x ?? 0, y: p.map?.y ?? 0 },
+    };
+  });
 }
 
 /**
  * Get map dimensions from map entity
  */
-export function getMapDimensions(mapEntity: any): MapDimensions | null {
+export function getMapDimensions(mapEntity: HassEntity | undefined): MapDimensions | null {
   const attrs = mapEntity?.attributes;
   
   if (!attrs) {
@@ -190,22 +195,26 @@ export function getMapDimensions(mapEntity: any): MapDimensions | null {
   }
 
   // Try to get dimensions from attributes
-  const top = attrs.top;
-  const left = attrs.left;
-  const height = attrs.height;
-  const width = attrs.width;
-  const gridSize = attrs.grid_size;
+  const top = typeof attrs.top === 'number' ? attrs.top : undefined;
+  const left = typeof attrs.left === 'number' ? attrs.left : undefined;
+  const height = typeof attrs.height === 'number' ? attrs.height : undefined;
+  const width = typeof attrs.width === 'number' ? attrs.width : undefined;
+  const gridSize = typeof attrs.grid_size === 'number' ? attrs.grid_size : undefined;
 
   if (top !== undefined && left !== undefined && height && width && gridSize) {
+    const scale = typeof attrs.scale === 'number' ? attrs.scale : 1;
+    const padding = Array.isArray(attrs.padding) ? attrs.padding as number[] : [0, 0, 0, 0];
+    const crop = Array.isArray(attrs.crop) ? attrs.crop as number[] : [0, 0, 0, 0];
+    
     return {
       top,
       left,
       height,
       width,
       grid_size: gridSize,
-      scale: attrs.scale || 1,
-      padding: attrs.padding || [0, 0, 0, 0],
-      crop: attrs.crop || [0, 0, 0, 0],
+      scale,
+      padding,
+      crop,
     };
   }
 
@@ -215,10 +224,10 @@ export function getMapDimensions(mapEntity: any): MapDimensions | null {
 /**
  * Get image dimensions from map entity
  */
-export function getImageDimensions(mapEntity: any): { width: number; height: number } | null {
+export function getImageDimensions(mapEntity: HassEntity | undefined): { width: number; height: number } | null {
   // Try to get dimensions from attributes
-  const width = mapEntity?.attributes?.width;
-  const height = mapEntity?.attributes?.height;
+  const width = typeof mapEntity?.attributes?.width === 'number' ? mapEntity.attributes.width : undefined;
+  const height = typeof mapEntity?.attributes?.height === 'number' ? mapEntity.attributes.height : undefined;
   
   if (width && height) {
     return { width, height };

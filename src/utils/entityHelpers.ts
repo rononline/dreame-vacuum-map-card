@@ -31,7 +31,7 @@ export function getEffectiveCleaningMode(
   entity: HassEntity,
   selectedMode: CleaningMode
 ): CleaningMode {
-  const vacuumStatus = entity.attributes.status || '';
+  const vacuumStatus = typeof entity.attributes.status === 'string' ? entity.attributes.status : '';
   const isSegmentCleaning = entity.attributes.segment_cleaning || false;
   const isZoneCleaning = entity.attributes.zone_cleaning || false;
   

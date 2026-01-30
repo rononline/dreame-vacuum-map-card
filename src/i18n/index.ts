@@ -1,5 +1,8 @@
 import { locales, type SupportedLanguage } from './locales';
 
+// Type for nested translation objects
+type TranslationValue = string | { [key: string]: TranslationValue };
+
 /**
  * Simple template replacement function
  * Replaces {{key}} patterns with values from params object
@@ -15,8 +18,13 @@ function interpolate(template: string, params?: Record<string, string | number>)
 /**
  * Gets a nested value from an object using dot notation
  */
-function getNestedValue(obj: any, path: string): any {
-  return path.split('.').reduce((current, key) => current?.[key], obj);
+function getNestedValue(obj: TranslationValue, path: string): TranslationValue | undefined {
+  return path.split('.').reduce<TranslationValue | undefined>((current, key) => {
+    if (current && typeof current === 'object' && key in current) {
+      return current[key];
+    }
+    return undefined;
+  }, obj);
 }
 
 /**
