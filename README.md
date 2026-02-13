@@ -9,7 +9,7 @@ A modern, beautiful Home Assistant Lovelace card for controlling Dreame robot va
 - Interactive map with room and zone selection
 - CleanGenius and Custom cleaning mode configuration
 - Real-time vacuum status and battery level
-- Light and dark theme support
+- **Customizable Theming**: Light, dark, and fully customizable themes
 - **Internationalization (i18n)**: English and German translations
 
 <div style="display: flex; gap: 10px;">
@@ -59,7 +59,7 @@ type: custom:dreame-vacuum-map-card
 entity: vacuum.dreame_vacuum_entity
 title: Dreame Vacuum
 map_entity: camera.dreame_vacuum_entity # Optional, defaults to camera.${ENTITY_NAME}_map
-theme: dark # Optional, 'light' (default) or 'dark'
+theme: light # Optional, 'light' (default), 'dark', or 'custom'
 language: en # Optional, 'en' (default) or 'de'
 ```
 
@@ -70,8 +70,101 @@ language: en # Optional, 'en' (default) or 'de'
 | `entity` | string | **Required** | Entity ID of your Dreame vacuum |
 | `title` | string | Optional | Custom title for the card |
 | `map_entity` | string | Optional | Camera entity for the vacuum map (defaults to `camera.${ENTITY_NAME}_map`) |
-| `theme` | string | `light` | Theme mode: `light` or `dark` |
+| `theme` | string | `light` | Theme mode: `light`, `dark`, or `custom` |
+| `custom_theme` | object | Optional | Custom theme configuration (see [Theming](#theming)) |
 | `language` | string | `en` | Language: `en` (English) or `de` (German) |
+
+## Theming
+
+The card features a comprehensive theming system with built-in and custom theme support.
+
+### Built-in Themes
+
+#### Light Theme (Default)
+```yaml
+type: custom:dreame-vacuum-map-card
+entity: vacuum.dreame_vacuum_entity
+theme: light
+```
+
+#### Dark Theme
+```yaml
+type: custom:dreame-vacuum-map-card
+entity: vacuum.dreame_vacuum_entity
+theme: dark
+```
+
+### Custom Themes
+
+Create fully customized themes by extending either the light or dark theme:
+
+```yaml
+type: custom:dreame-vacuum-map-card
+entity: vacuum.dreame_vacuum_entity
+theme: custom
+custom_theme:
+  base: dark  # Extend 'dark' or 'light' theme
+  accentColor: '#ff6b6b'
+  accentColorHover: '#ff5252'
+  accentBg: 'rgba(255, 107, 107, 0.2)'
+```
+
+#### Available Theme Properties
+
+You can customize any of the following colors:
+
+**Background Colors:**
+- `cardBg`, `surfaceBg`, `surfaceSecondary`, `surfaceTertiary`, `surfaceBgHover`
+
+**Text Colors:**
+- `textPrimary`, `textPrimaryInvert`, `textSecondary`, `textTertiary`
+
+**Accent Colors:**
+- `accentColor`, `accentColorHover`, `accentBg`, `accentBgHover`, `accentBgTransparent`, `accentShadow`, `accentColorShadowColor`
+
+**State Colors:**
+- `warningColor`, `warningShadow`, `errorColor`, `errorColorHover`, `errorShadow`
+
+**UI Elements:**
+- `borderColor`, `overlayBg`, `cardShadow`, `cardShadowHover`, `handleShadow`, `handleBg`, `backdropBg`
+
+**Toggle Specific:**
+- `toggleActive`, `toggleActiveBorder`, `toggleActiveShadowColor`
+
+### Example Custom Themes
+
+#### Ocean Blue
+```yaml
+theme: custom
+custom_theme:
+  base: dark
+  cardBg: '#0a1929'
+  surfaceBg: '#132f4c'
+  accentColor: '#29b6f6'
+  toggleActiveBorder: '#29b6f6'
+```
+
+#### Warm Sunset
+```yaml
+theme: custom
+custom_theme:
+  base: light
+  cardBg: '#fff8e1'
+  accentColor: '#ff6f00'
+  accentBg: '#ffe0b2'
+```
+
+#### Forest Green
+```yaml
+theme: custom
+custom_theme:
+  base: light
+  cardBg: '#f1f8e9'
+  accentColor: '#2e7d32'
+  accentBg: '#c8e6c9'
+```
+
+For more examples and complete theming documentation, see [THEMING.md](THEMING.md).
 
 ## Internationalization (i18n)
 
@@ -173,6 +266,7 @@ The built file will be in `dist/dreame-vacuum-map-card.js`
 ## Tech Stack
 
 - **React 19.2.0** 
+- **Lucide React Icons**
 - **TypeScript 5.9.3**
 - **Vite 7.2.4**
 - **SASS**

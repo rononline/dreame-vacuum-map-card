@@ -8,4 +8,5 @@ export { useVacuumCardState } from './useVacuumCardState';
 export { useVacuumServices } from './useVacuumServices';
 export { useToast } from './useToast';
 export { useTranslation } from './useTranslation';
+export { useTheme } from './useTheme';
 export type { VacuumEntityIds } from './useVacuumEntityIds';

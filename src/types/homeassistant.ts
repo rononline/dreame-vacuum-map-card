@@ -1,3 +1,5 @@
+import type { CustomThemeConfig } from '../themes';
+
 export interface HassEntity {
   entity_id: string;
   state: string;
@@ -32,7 +34,8 @@ export interface HassConfig {
   map_entity?: string;
   title?: string;
   type: string;
-  theme?: 'light' | 'dark';
+  theme?: 'light' | 'dark' | 'custom';
+  custom_theme?: CustomThemeConfig;
   language?: 'en' | 'de' | 'ru';
 }
 
