@@ -13,6 +13,7 @@
     cursor: pointer;
     border: 0.0625rem solid var(--text-primary, black);
     transition: all 0.2s ease;
+    color: var(--text-primary);
 
     &--small {
       width: 3.5rem;

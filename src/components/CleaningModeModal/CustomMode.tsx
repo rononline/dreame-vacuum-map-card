@@ -87,7 +87,6 @@ export function CustomMode({
                 selected={mode === cleaningMode}
                 onClick={() => setSelectOption(entityIds.cleaningMode, convertCleaningModeToService(mode as CleaningMode))}
                 icon={getCleaningModeIcon(mode as CleaningMode)}
-                iconStyle={idx > 1 ? {fontSize: 13, color: "black"} : {}}
               />
               <span className="cleaning-mode-modal__mode-option-label">{getCleaningModeFriendlyName(mode as CleaningMode)}</span>
             </div>
@@ -106,7 +105,6 @@ export function CustomMode({
                 selected={level === suctionLevel}
                 onClick={() => setSelectOption(entityIds.suctionLevel, convertToLowerCase(level))}
                 icon={getSuctionLevelIcon(level as SuctionLevel)}
-                iconStyle={idx > 2 ? {fontSize: 13, color: "black"} : {}}
               />
               <span className="cleaning-mode-modal__power-label">{getSuctionLevelFriendlyName(level as SuctionLevel)}</span>
             </div>

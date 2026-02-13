@@ -13,6 +13,9 @@
 
   &__button {
     flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: none;
     border-radius: 0.6875rem;
     padding: 0.625rem;
@@ -22,6 +25,11 @@
     transition: all 0.2s;
     background-color: transparent;
     color: var(--text-secondary, #666);
+
+    &-icon svg {
+      scale: 0.5;
+      color: var(--text-secondary, #666);
+    }
 
     &--active {
       background-color: var(--surface-bg, white);
