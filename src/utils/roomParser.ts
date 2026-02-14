@@ -46,6 +46,7 @@ export function parseRoomsFromCamera(hass: Hass, cameraEntityId: string): Room[]
 
 /**
  * Convert vacuum coordinates to map pixel coordinates
+ * Uses calibration points for accurate transformation
  */
 export function vacuumToMapCoordinates(
   vacuumX: number,
@@ -104,12 +105,5 @@ export function createRoomPath(
   const bottomLeft = vacuumToMapCoordinates(room.x0, room.y1, calibrationPoints, imageWidth, imageHeight);
 
   const path = `M ${topLeft.x} ${topLeft.y} L ${topRight.x} ${topRight.y} L ${bottomRight.x} ${bottomRight.y} L ${bottomLeft.x} ${bottomLeft.y} Z`;
-  
-  console.log(`Room ${room.id} (${room.name}) path:`, {
-    vacuum: { x0: room.x0, y0: room.y0, x1: room.x1, y1: room.y1 },
-    pixels: { topLeft, topRight, bottomRight, bottomLeft },
-    path
-  });
-  
   return path;
 }

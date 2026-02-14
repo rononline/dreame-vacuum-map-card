@@ -177,18 +177,18 @@
     transition: all 0.2s ease;
 
     &:hover {
-      fill: var(--accent-bg, rgba(212, 175, 55, 0.2));
+      fill: var(--accent-bg-transparent, rgba(212, 175, 55, 0.2));
       stroke: var(--accent-color, #D4AF37);
       stroke-width: 3;
     }
 
     &--selected {
-      fill: var(--accent-bg, rgba(212, 175, 55, 0.3));
+      fill: var(--accent-bg-transparent, rgba(212, 175, 55, 0.3));
       stroke: var(--accent-color, #D4AF37);
       stroke-width: 3;
       
       &:hover {
-        fill: var(--accent-bg-hover, rgba(212, 175, 55, 0.4));
+        fill: var(--accent-bg-transparent, rgba(212, 175, 55, 0.4));
       }
     }
   }
