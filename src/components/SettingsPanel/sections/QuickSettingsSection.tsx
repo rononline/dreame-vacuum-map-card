@@ -53,13 +53,6 @@ const QUICK_SETTINGS: QuickSetting[] = [
     attributeKey: 'auto_drying',
     switchEntitySuffix: 'auto_drying',
   },
-  {
-    key: 'dnd',
-    labelKey: 'settings.quick_settings.dnd',
-    descriptionKey: 'settings.quick_settings.dnd_desc',
-    attributeKey: 'dnd',
-    switchEntitySuffix: 'dnd',
-  },
 ];
 
 export function QuickSettingsSection({ hass, entity }: QuickSettingsSectionProps) {
