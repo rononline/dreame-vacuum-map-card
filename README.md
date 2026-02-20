@@ -61,6 +61,7 @@ title: Dreame Vacuum
 map_entity: camera.dreame_vacuum_entity # Optional, defaults to camera.${ENTITY_NAME}_map
 theme: light # Optional, 'light' (default), 'dark', or 'custom'
 language: en # Optional, 'en' (default) or 'de'
+default_mode: all # Optional, 'all' (default), 'room', or 'zone'
 ```
 
 ## Configuration
@@ -73,6 +74,7 @@ language: en # Optional, 'en' (default) or 'de'
 | `theme` | string | `light` | Theme mode: `light`, `dark`, or `custom` |
 | `custom_theme` | object | Optional | Custom theme configuration (see [Theming](#theming)) |
 | `language` | string | `en` | Language: `en` (English) or `de` (German) |
+| `default_mode` | string | `all` | Default tab to display: `all`, `room`, or `zone` |
 
 ## Theming
 
