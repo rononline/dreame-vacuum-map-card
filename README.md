@@ -93,7 +93,7 @@ default_room_view: map # Optional, 'map' (default) or 'list'
 | `map_entity`        | string | Optional     | Camera entity for the vacuum map (defaults to `camera.${ENTITY_NAME}_map`) |
 | `theme`             | string | `light`      | Theme mode: `light`, `dark`, or `custom`                                   |
 | `custom_theme`      | object | Optional     | Custom theme configuration (see [Theming](#theming))                       |
-| `language`          | string | `en`         | Language: `en` (English) or `de` (German)                                  |
+| `language`          | string | `en`         | Language: `en`, `de`, `ru`, or `pl`                                        |
 | `default_mode`      | string | `all`        | Default tab to display: `all`, `room`, or `zone`                           |
 | `default_room_view` | string | `map`        | Default room selection view: `map` (interactive) or `list` (scrollable)    |
 
@@ -206,6 +206,8 @@ The card supports multiple languages. Currently available:
 
 - **English (en)** - Default
 - **German (de)** - Deutsch
+- **Russian (ru)** - Русский
+- **Polish (pl)** - Polski
 
 Set the language in your configuration:
 

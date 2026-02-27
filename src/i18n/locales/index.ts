@@ -1,11 +1,13 @@
 import { en } from './en';
 import { de } from './de';
 import { ru } from './ru';
+import { pl } from './pl';
 
 export const locales = {
   en,
   de,
   ru,
+  pl,
 };
 
 export type SupportedLanguage = keyof typeof locales;
